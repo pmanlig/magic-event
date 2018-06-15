@@ -1,0 +1,26 @@
+#events {
+	padding: 5px 10px 5px 5px;
+	height: 100%;
+	text-align: left;
+	background-color: lightgoldenrodyellow;
+}
+
+#events > p {
+	text-align: left;
+}
+
+#events > button {
+	margin-left: 5px;
+}
+
+#events > ul {
+	padding: 0;
+}
+
+#events li button {
+	display: none;
+}
+
+#events li:hover button {
+	display: inline-block;
+}

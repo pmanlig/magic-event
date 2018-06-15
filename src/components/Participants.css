@@ -1,0 +1,29 @@
+#directory {
+	padding: 5px 10px 5px 5px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: lightsteelblue;
+}
+
+#directory > div {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+#directory input {
+	margin: 0 5px;
+}
+
+#directory > ul {
+	padding: 0;
+}
+
+#directory li > button {
+	display: none;
+}
+
+#directory li:hover > button.directory-button {
+	display: inline-block;
+}
