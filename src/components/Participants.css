@@ -1,29 +1,35 @@
 #directory {
-	padding: 5px 10px 5px 5px;
+	padding: 0 10px 0 5px;
 	height: 100%;
+	width: 450px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background-color: lightsteelblue;
+	overflow-y: auto;
 }
 
-#directory > div {
-	display: flex;
-	flex-wrap: nowrap;
-}
-
-#directory input {
-	margin: 0 5px;
-}
-
-#directory > ul {
-	padding: 0;
-}
-
-#directory li > button {
+#directory .button {
 	display: none;
 }
 
-#directory li:hover > button.directory-button {
+#directory .tile:hover > button.directory-button {
 	display: inline-block;
 }
+
+#pwinput {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: baseline;
+}
+
+#pwinput > input {
+	display: inline-block;
+	margin: 3px 5px 5px 0;
+}
+
+#pwinput > button {
+	display: inline-block;
+	width: 80px;
+}
+

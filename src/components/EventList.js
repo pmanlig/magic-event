@@ -16,18 +16,16 @@ export class EventList extends React.Component {
 		let { selected, events, selectEvent } = this.props;
 		if (selected) {
 			return <header id="selectedEvent selectable" className="event">
-			<p>{selected}</p>
-			<button onClick={() => selectEvent("")}>X</button>
+				<p>{selected}</p>
+				<button onClick={() => selectEvent("")}>X</button>
 			</header>;
 		}
 
 		return <div id="events">
-			<p>Välj event att administrera eller skapa nytt</p>
+			<p>Select event or create new</p>
 			<input placeholder="Event" value={this.state.eventName} onChange={e => this.setState({ eventName: e.target.value })} size="20" />
-			<button onClick={this.createEvent}>Skapa</button>
-			<ul>
-				{events.map(e => <EventTile key={e.name} event={e} {...this.props} />)}
-			</ul>
+			<button onClick={this.createEvent}>Create</button>
+			{events.map(e => <EventTile key={e.name} event={e} {...this.props} />)}
 		</div>;
 	}
 }

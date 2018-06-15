@@ -1,21 +1,32 @@
+import './Buttons.css';
 import './App.css';
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { Storage } from './logic';
 import { Event } from './models';
-import { EventList, SelectedEvent, Participants, EventView } from './components';
+import { EventList, Participants, EventView } from './components';
+
+const eventsKey = "events";
+const selectedKey = "selected";
 
 class App extends Component {
 	constructor(props) {
 		super(props);
-		let storedEvents = window.localStorage.getItem("events");
-		if (storedEvents) {
-			storedEvents = JSON.parse(storedEvents);
-		}
 		this.state = {
-			events: storedEvents || [],
-			selectedEvent: null,
+			events: this.loadEvents(),
+			selectedEvent: this.loadSelectedEvent(),
 			statusMsg: ""
 		}
+	}
+
+	loadSelectedEvent() {
+		let loadedEvent = Storage.getItem(selectedKey);
+		return loadedEvent ? new Event(loadedEvent) : null;
+	}
+
+	loadEvents() {
+		let loadedEvents = Storage.getItem(eventsKey);
+		return loadedEvents ? loadedEvents.map(e => new Event(e)) : [];
 	}
 
 	setStatusMsg(msg) {
@@ -24,7 +35,7 @@ class App extends Component {
 	}
 
 	updateEvents(newEvents) {
-		window.localStorage.setItem("events", JSON.stringify(newEvents));
+		Storage.setItem(eventsKey, newEvents);
 		this.setState({ events: newEvents });
 	}
 
@@ -39,7 +50,7 @@ class App extends Component {
 			return;
 		}
 
-		this.updateEvents(this.state.events.concat([new Event(e)]));
+		this.updateEvents(this.state.events.concat([new Event({ name: e })]));
 	}
 
 	deleteEvent = e => {
@@ -47,7 +58,15 @@ class App extends Component {
 	}
 
 	selectEvent = e => {
+		Storage.setItem(selectedKey, e);
+		Storage.setItem(eventsKey, this.state.events);
 		this.setState({ selectedEvent: e });
+	}
+
+	updateSelectedEvent = () => {
+		Storage.setItem(selectedKey, this.state.selectedEvent);
+		Storage.setItem(eventsKey, this.state.events);
+		this.setState({});
 	}
 
 	render() {
@@ -58,11 +77,10 @@ class App extends Component {
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1 className="App-title">Magic: the Gathering event administrator</h1>
 				</header>
-				{selectedEvent && <SelectedEvent event={selectedEvent} unselectEvent={() => this.selectEvent("")} />}
 				<div className="content">
 					{!selectedEvent && <EventList events={events} selected={selectedEvent} createEvent={this.addEvent} deleteEvent={this.deleteEvent} selectEvent={this.selectEvent} />}
-					{selectedEvent && <Participants event={selectedEvent} />}
-					<EventView event={selectedEvent} />
+					{selectedEvent && <Participants event={selectedEvent} onUpdate={this.updateSelectedEvent} />}
+					<EventView event={selectedEvent} onBack={() => this.selectEvent(null)} onUpdate={this.updateSelectedEvent} />
 				</div>
 				{statusMsg !== "" && <div id="statusMsg">{statusMsg}</div>}
 			</div>

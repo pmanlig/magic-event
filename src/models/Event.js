@@ -1,14 +1,15 @@
-export class Event {
-	name = "";
-	numMatches = 0;
-	participants = [];
+import { Participant } from '.';
 
-	constructor(name) {
-		this.name = name;
+export class Event {
+	constructor({ name, numRounds, participants, rounds }) {
+		this.name = name || "";
+		this.numRounds = numRounds || 0;
+		this.participants = participants ? participants.map(p => new Participant(p)) : [];
+		this.rounds = rounds || [];
 	}
 
 	addParticipant(planeswalker) {
-		this.participants.push(planeswalker);
+		this.participants.push(new Participant(planeswalker));
 	}
 
 	removeParticipant(planeswalker) {

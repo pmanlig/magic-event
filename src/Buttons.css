@@ -1,0 +1,75 @@
+.button {
+	position: relative;
+	flex-grow: 0;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	border-width: 3px;
+	border-style: solid;
+	margin: 4px 5px 4px 5px;
+	font-weight: bolder;
+	font-size: 0.4em;
+	opacity: 0.3;
+}
+
+.button:hover {
+	opacity: 1;
+}
+
+.close::before, .close::after {
+	position: absolute;
+	bottom: 2px;
+  content: ' ';
+  height: 15px;
+	width: 0px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.close::before {
+  transform: rotate(45deg);
+}
+
+.close::after {
+  transform: rotate(-45deg);
+}
+
+.next::before, .next::after {
+	position: absolute;
+	right: 6px;
+	bottom: 2px;
+  content: ' ';
+  height: 7px;
+	width: 0px;
+	border-width: 1px;
+	border-style: solid;
+	transform-origin: 50% 1px;
+}
+
+.next::before {
+  transform: rotate(135deg);
+}
+
+.next::after {
+  transform: rotate(45deg);
+}
+
+.previous::before, .previous::after {
+	position: absolute;
+	left: 6px;
+	bottom: 2px;
+  content: ' ';
+  height: 7px;
+	width: 0px;
+	border-width: 1px;
+	border-style: solid;
+	transform-origin: 50% 1px;
+}
+
+.previous::before {
+  transform: rotate(-135deg);
+}
+
+.previous::after {
+  transform: rotate(-45deg);
+}

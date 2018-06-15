@@ -4,3 +4,7 @@ export { Participants } from './Participants';
 export { PlaneswalkerTile } from './PlaneswalkerTile';
 export { SelectedEvent } from './SelectedEvent';
 export { EventView } from './EventView';
+export { ParticipantList } from './ParticipantList';
+export { RoundSpinner } from './RoundSpinner';
+export { MatchupsDisplay } from './MatchupsDisplay';
+export { MatchControl } from './MatchControl';
