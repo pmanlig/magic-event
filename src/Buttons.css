@@ -55,10 +55,10 @@
 }
 
 .previous::before, .previous::after {
+  content: ' ';
 	position: absolute;
 	left: 6px;
 	bottom: 2px;
-  content: ' ';
   height: 7px;
 	width: 0px;
 	border-width: 1px;

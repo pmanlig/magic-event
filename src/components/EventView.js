@@ -1,54 +1,46 @@
 import './EventView.css';
 import React from 'react';
 import { ParticipantList, RoundSpinner, MatchupsDisplay } from '.';
-import { Matchups } from '../models';
 
 export class EventView extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { currentRound: 0 };
-	}
-
 	removeParticipant = p => {
 		this.props.event.removeParticipant(p);
 		this.props.onUpdate();
 	}
 
 	changeRounds = d => {
-		this.props.event.numRounds = Math.max(this.props.event.numRounds + d, 0);
+		this.props.event.changeNumRounds(d);
 		this.props.onUpdate();
 	}
 
 	increaseRound = () => {
-		let event = this.props.event;
-		let nextRound = this.state.currentRound + 1;
-		if (!event.rounds[nextRound]) {
-			event.rounds[nextRound] = new Matchups(event);
-		}
-		this.setState({ currentRound: nextRound });
+		this.props.event.nextRound();
+		this.setState({});
 	}
 
 	decreaseRound = () => {
-		if (this.state.currentRound === 0) {
+		if (this.props.event.currentRound === 0) {
 			this.props.onBack();
-			return;
+		} else {
+			this.props.event.previousRound();
+			this.setState({});
 		}
-		this.setState({ currentRound: this.state.currentRound - 1 });
 	}
 
 	render() {
-		let { event } = this.props;
-		let { currentRound } = this.state;
+		let event = this.props.event;
 
 		if (!event) {
 			return <div id="event-view"><div id="event-bar"><h1>Event</h1></div></div>;
 		}
 
+		let currentRound = event.currentRound;
+
 		return <div id="event-view">
 			<div id="event-bar">
 				<button className="button previous" onClick={this.decreaseRound} />
 				<h1>{event.name + (currentRound > 0 ? " - round " + currentRound : "")}</h1>
-				{event.numRounds > this.state.currentRound && <button className="button next" onClick={this.increaseRound} />}
+				{event.numRounds > currentRound && <button className="button next" onClick={this.increaseRound} />}
 			</div>
 			<div id="event-details">
 				<ParticipantList event={event} removeParticipant={this.removeParticipant} />
