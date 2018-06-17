@@ -6,5 +6,6 @@ export { SelectedEvent } from './SelectedEvent';
 export { EventView } from './EventView';
 export { ParticipantList } from './ParticipantList';
 export { RoundSpinner } from './RoundSpinner';
-export { MatchupsDisplay } from './MatchupsDisplay';
+export { PairingsDisplay } from './PairingsDisplay';
 export { MatchControl } from './MatchControl';
+export { ResultButton } from './ResultButton';

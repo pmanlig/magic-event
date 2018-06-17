@@ -79,7 +79,7 @@ class App extends Component {
 				</header>
 				<div className="content">
 					{!selectedEvent && <EventList events={events} selected={selectedEvent} createEvent={this.addEvent} deleteEvent={this.deleteEvent} selectEvent={this.selectEvent} />}
-					{selectedEvent && <Participants event={selectedEvent} onUpdate={this.updateSelectedEvent} />}
+					{selectedEvent && selectedEvent.currentRound === 0 && <Participants event={selectedEvent} onUpdate={this.updateSelectedEvent} />}
 					<EventView event={selectedEvent} onBack={() => this.selectEvent(null)} onUpdate={this.updateSelectedEvent} />
 				</div>
 				{statusMsg !== "" && <div id="statusMsg">{statusMsg}</div>}

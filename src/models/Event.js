@@ -1,11 +1,11 @@
-import { Participant, Matchups } from '.';
+import { Participant, Pairings } from '.';
 
 export class Event {
 	constructor({ name, numRounds, participants, rounds, currentRound }) {
 		this.name = name || "";
 		this.numRounds = numRounds || 0;
 		this.participants = participants ? participants.map(p => new Participant(p)) : [];
-		this.rounds = rounds || [];
+		this.rounds = rounds ? rounds.map(r => Pairings.fromJson(r)) : [];
 		this.currentRound = currentRound || 0;
 	}
 
@@ -22,14 +22,35 @@ export class Event {
 	}
 
 	nextRound() {
-		let nextRound = this.currentRound + 1;
-		if (!this.rounds[nextRound]) {
-			this.rounds[nextRound] = new Matchups(this);
+		let { currentRound, rounds } = this;
+		let nextRound = currentRound + 1;
+		if (currentRound > 0 && !rounds[nextRound]) {
+			rounds[currentRound].conclude();
+			this.participants.sort((a, b) => b.score() - a.score());
 		}
-		this.currentRound = nextRound;
+		if (currentRound < this.numRounds) {
+			if (!rounds[nextRound]) {
+				rounds[nextRound] = Pairings.fromEvent(this);
+			}
+			this.currentRound = nextRound;
+		} else {
+			this.currentRound = 0;
+		}
 	}
 
 	previousRound() {
 		this.currentRound -= 1;
+	}
+
+	restartRound() {
+		this.rounds[this.currentRound] = Pairings.fromEvent(this);
+	}
+
+	canRestartRound() {
+		return this.currentRound > 0 && !this.rounds[this.currentRound].isComplete();
+	}
+
+	canAdvanceRound() {
+		return this.currentRound === 0 || this.rounds[this.currentRound].isComplete();
 	}
 }

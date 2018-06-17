@@ -19,11 +19,11 @@
 }
 
 #event-bar > .button {
-	flex-grow: 0;
 	margin: auto 10px;
 	background-color: lightgray;
 	border-color: black;
 	color: black;
+	display: inline-block;
 }
 
 #event-details {
@@ -36,6 +36,7 @@
 	border: 1px solid lightcoral;
 	box-shadow: 1px 1px 2px;
 	margin-right: 10px;
+	padding: 10px;
 }
 
 .settings h2 {
@@ -59,14 +60,10 @@
 }
 
 #round-control > .button {
-	flex-grow: 0;
 	margin: auto 10px;
 	background-color: lightgreen;
 	border-color: black;
 	color: black;
-}
-
-#round-control > button {
 	display: inline-block;
 }
 
@@ -77,11 +74,49 @@
 
 .match {
 	display: flex;
+	flex-direction: column;
 	align-content: center;
 	justify-content: center;
 }
 
-.match > p {
-	margin: auto 5px auto 10px;
+.match p {
+	margin: auto 20px auto 25px;
 	display: inline-block;
+}
+
+.match div {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.match > .result-selector {
+	justify-content: center;
+	display: none;
+}
+
+.match:hover > .result-selector {
+	display: flex;
+}
+
+.result-button {
+	background-color: lightgray;
+	color: black;
+	border: none;
+	padding: 5px 10px;
+	margin: 5px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+}
+
+.result-button:hover {
+	background-color: #f44336;;
+	color: white;
+}
+
+.selected {
+	background-color: #008CBA;
+	color: white;
 }

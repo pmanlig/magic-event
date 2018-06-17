@@ -1,9 +1,10 @@
 import { Planeswalker } from '.';
 
 export class Participant extends Planeswalker {
-	constructor({ scores, ...p }) {
+	constructor({ scores, opponents, ...p }) {
 		super({ ...p });
-		this.scores = scores || [];
+		this.scores = scores || [];  // Scores by round
+		this.opponents = opponents || [];  // Opponent's DCI by round
 	}
 
 	score() {

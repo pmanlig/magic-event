@@ -1,5 +1,6 @@
 #events {
 	padding: 5px 10px 5px 5px;
+	width: 340px;
 	text-align: left;
 	background-color: lightgoldenrodyellow;
 }
@@ -10,10 +11,6 @@
 
 #events > button {
 	margin-left: 5px;
-}
-
-#events .tile button {
-	display: none;
 }
 
 #events .tile:hover button {
