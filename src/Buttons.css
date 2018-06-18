@@ -18,6 +18,7 @@
 
 .close::before, .close::after {
 	position: absolute;
+	left: 9px;
 	bottom: 2px;
   content: ' ';
   height: 15px;

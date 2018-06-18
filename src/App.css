@@ -13,6 +13,7 @@
 }
 
 .App-header {
+	height: 90px;
 	display: flex;
   background-color: #222;
   padding: 20px;
@@ -69,11 +70,32 @@
 	display: flex;
 }
 
-.selectable > p {
+.selectable > .button {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.selectable > .planeswalker-name {
+	margin: 0;
+	padding: 0;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.planeswalker-name > p {
 	display: inline-block;
 	margin: 3px;
 	padding: 0;
-	flex-grow: 1;
+}
+
+.selectable .dci {
+	font-size: 0.5em;
+	display: none;
+}
+
+.selectable:hover .dci {
+	display: inline-block;
 }
 
 .event {

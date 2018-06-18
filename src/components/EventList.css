@@ -13,6 +13,10 @@
 	margin-left: 5px;
 }
 
+#events .list-header {
+	margin-bottom: 10px;
+}
+
 #events .tile:hover button {
 	display: inline-block;
 }

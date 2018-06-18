@@ -3,7 +3,7 @@ import React from 'react';
 import { Planeswalker } from '../models';
 import { PlaneswalkerTile } from '.';
 
-export class Participants extends React.Component {
+export class PlaneswalkerList extends React.Component {
 	constructor(props) {
 		super(props);
 		let directory = window.localStorage.getItem("pwdirectory");
@@ -36,6 +36,7 @@ export class Participants extends React.Component {
 			return;
 		}
 		this.updateDirectory(this.state.directory.concat([new Planeswalker({ name: this.state.name, dci: this.state.dci })]));
+		this.setState({ name: "", dci: "" });
 	}
 
 	removeFromDirectory = p => {
@@ -53,6 +54,8 @@ export class Participants extends React.Component {
 		if (!event) { return null; }
 
 		let directory = this.state.directory.filter(pw => !event.participants.some(p => p.dci === pw.dci));
+		directory = directory.filter(pw => pw.name.includes(this.state.name));
+		directory = directory.filter(pw => pw.dci.includes(this.state.dci));
 
 		return <div id="directory">
 			<p>Select participants or add to directory</p>
@@ -61,7 +64,9 @@ export class Participants extends React.Component {
 				<input placeholder="DCI" size="15" value={this.state.dci} onChange={this.updateDci} />
 				<button onClick={this.addToDirectory}>Add</button>
 			</div>
-			{directory.map(p => <PlaneswalkerTile key={p.dci} planeswalker={p} onDelete={this.removeFromDirectory} onAdd={this.addToEvent} />)}
+			<div id="pw-list">
+				{directory.map(p => <PlaneswalkerTile key={p.dci} planeswalker={p} onDelete={this.removeFromDirectory} onAdd={this.addToEvent} />)}
+			</div>
 		</div>;
 	}
 }

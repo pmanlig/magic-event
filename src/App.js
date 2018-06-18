@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Storage } from './logic';
 import { Event } from './models';
-import { EventList, Participants, EventView } from './components';
+import { EventList, PlaneswalkerList, EventView } from './components';
 
 const eventsKey = "events";
 const selectedKey = "selected";
@@ -79,7 +79,7 @@ class App extends Component {
 				</header>
 				<div className="content">
 					{!selectedEvent && <EventList events={events} selected={selectedEvent} createEvent={this.addEvent} deleteEvent={this.deleteEvent} selectEvent={this.selectEvent} />}
-					{selectedEvent && selectedEvent.currentRound === 0 && <Participants event={selectedEvent} onUpdate={this.updateSelectedEvent} />}
+					{selectedEvent && selectedEvent.currentRound === 0 && <PlaneswalkerList event={selectedEvent} onUpdate={this.updateSelectedEvent} />}
 					<EventView event={selectedEvent} onBack={() => this.selectEvent(null)} onUpdate={this.updateSelectedEvent} />
 				</div>
 				{statusMsg !== "" && <div id="statusMsg">{statusMsg}</div>}

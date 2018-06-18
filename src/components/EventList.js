@@ -22,9 +22,11 @@ export class EventList extends React.Component {
 		}
 
 		return <div id="events">
-			<p>Select event or create new</p>
-			<input placeholder="Event" value={this.state.eventName} onChange={e => this.setState({ eventName: e.target.value })} size="20" />
-			<button onClick={this.createEvent}>Create</button>
+			<div className="list-header">
+				<p>Select event or create new</p>
+				<input placeholder="Event" value={this.state.eventName} onChange={e => this.setState({ eventName: e.target.value })} size="20" />
+				<button onClick={this.createEvent}>Create</button>
+			</div>
 			{events.map(e => <EventTile key={e.name} event={e} {...this.props} />)}
 		</div>;
 	}
