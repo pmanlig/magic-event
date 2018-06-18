@@ -31,7 +31,8 @@ export class PlaneswalkerList extends React.Component {
 		this.setState({ directory: newDirectory });
 	}
 
-	addToDirectory = () => {
+	addToDirectory = e => {
+		e.preventDefault();
 		if (this.state.directory.some(p => p.dci === this.state.dci)) {
 			window.alert("DCI-numret finns redan!");
 			return;
@@ -61,12 +62,12 @@ export class PlaneswalkerList extends React.Component {
 		directory = directory.filter(pw => pw.dci.includes(this.state.dci));
 
 		return <div id="directory">
-			<div className="info-text">Select participants or add to directory</div>
-			<div id="pwinput">
+			<p className="info-text">Select participants or add to directory</p>
+			<form id="pwinput">
 				<input placeholder="Name" size="20" value={this.state.name} onChange={this.updateName} />
 				<input placeholder="DCI" size="15" value={this.state.dci} onChange={this.updateDci} />
-				<button onClick={this.addToDirectory}>Add</button>
-			</div>
+				<input type="submit" value="Add" onClick={this.addToDirectory} />
+			</form>
 			<div id="pw-list">
 				{directory.map(p => <PlaneswalkerTile key={p.dci} planeswalker={p} onDelete={this.removeFromDirectory} onAdd={this.addToEvent} />)}
 			</div>

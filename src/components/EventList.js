@@ -8,7 +8,8 @@ export class EventList extends React.Component {
 		this.state = { eventName: "" }
 	}
 
-	createEvent = () => {
+	createEvent = e => {
+		e.preventDefault();
 		this.props.createEvent(this.state.eventName);
 	}
 
@@ -24,8 +25,10 @@ export class EventList extends React.Component {
 		return <div id="events">
 			<div className="list-header">
 				<p>Select event or create new</p>
-				<input placeholder="Event" value={this.state.eventName} onChange={e => this.setState({ eventName: e.target.value })} size="20" />
-				<button onClick={this.createEvent}>Create</button>
+				<form action="">
+					<input placeholder="Event" value={this.state.eventName} onChange={e => this.setState({ eventName: e.target.value })} size="20" />
+					<input type="submit" value="Create" onClick={this.createEvent} />
+				</form>
 			</div>
 			{events.map(e => <EventTile key={e.name} event={e} {...this.props} />)}
 		</div>;

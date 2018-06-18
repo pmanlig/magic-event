@@ -22,32 +22,27 @@
 
 .info-text {
 	flex: 0 0 auto;
-	padding: 5px;
+	text-align: left;
+	margin: 5px;
 }
 
 #pwinput {
 	flex: 0 0 auto;
-	padding: 5px;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: left;
 	align-content: baseline;
 }
 
 #pwinput > input {
-	display: inline-block;
-	margin: 3px 5px 5px 0;
-}
-
-#pwinput > button {
-	display: inline-block;
-	width: 80px;
+	margin: 5px;
+	border-radius: 5px;
+	padding: 3px 5px;
 }
 
 #pw-list {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	overflow-y: auto;
 }
 

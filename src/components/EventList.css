@@ -5,12 +5,15 @@
 	background-color: lightgoldenrodyellow;
 }
 
-#events > p {
+#events p {
+	margin: 5px;
 	text-align: left;
 }
 
-#events > button {
-	margin-left: 5px;
+#events input {
+	margin: 5px;
+	border-radius: 5px;
+	padding: 3px 6px;
 }
 
 #events .list-header {
