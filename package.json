@@ -1,7 +1,8 @@
 {
   "name": "magic-event",
   "version": "0.1.0",
-  "private": true,
+	"private": true,
+	"homepage": "http://manlig.org/magic-event",
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
