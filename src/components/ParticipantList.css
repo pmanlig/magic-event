@@ -1,0 +1,22 @@
+#participant-list {
+	margin: 0;
+	padding: 0;
+	min-width: 350px;
+	background-color: lightcyan;
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+#participant-list .tile .button {
+	display: none;
+}
+
+#participant-list .tile:hover .event-button {
+	display: inline-block;
+}
+
+#participant-table {
+	display: flex;
+	flex-flow: column wrap;
+	overflow-x: auto;
+}

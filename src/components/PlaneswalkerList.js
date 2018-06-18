@@ -1,4 +1,4 @@
-import "./Participants.css";
+import "./PlaneswalkerList.css";
 import React from 'react';
 import { Planeswalker } from '../models';
 import { PlaneswalkerTile } from '.';
@@ -13,7 +13,8 @@ export class PlaneswalkerList extends React.Component {
 		this.state = {
 			directory: directory || [],
 			name: "",
-			dci: ""
+			dci: "",
+			directoryOffset: 0
 		};
 	}
 
@@ -53,12 +54,14 @@ export class PlaneswalkerList extends React.Component {
 
 		if (!event) { return null; }
 
+		const pageSize = 12;
+		let directoryOffset = this.state.directoryOffset;
 		let directory = this.state.directory.filter(pw => !event.participants.some(p => p.dci === pw.dci));
 		directory = directory.filter(pw => pw.name.includes(this.state.name));
 		directory = directory.filter(pw => pw.dci.includes(this.state.dci));
 
 		return <div id="directory">
-			<p>Select participants or add to directory</p>
+			<div className="info-text">Select participants or add to directory</div>
 			<div id="pwinput">
 				<input placeholder="Name" size="20" value={this.state.name} onChange={this.updateName} />
 				<input placeholder="DCI" size="15" value={this.state.dci} onChange={this.updateDci} />
@@ -67,6 +70,10 @@ export class PlaneswalkerList extends React.Component {
 			<div id="pw-list">
 				{directory.map(p => <PlaneswalkerTile key={p.dci} planeswalker={p} onDelete={this.removeFromDirectory} onAdd={this.addToEvent} />)}
 			</div>
+			{directory.length > pageSize && <div id="page-control">
+				{directoryOffset > 0 && <button className="button previous" onClick={() => this.setState({ directoryOffset: directoryOffset - pageSize })} />}
+				{directoryOffset + pageSize < directory.length && <button className="button next" onClick={() => this.setState({ directoryOffset: directoryOffset + pageSize })} />}
+			</div>}
 		</div>;
 	}
 }

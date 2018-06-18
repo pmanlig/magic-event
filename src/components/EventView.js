@@ -1,13 +1,8 @@
 import './EventView.css';
 import React from 'react';
-import { ParticipantList, RoundSpinner, PairingsDisplay } from '.';
+import { RoundSpinner, PairingsDisplay } from '.';
 
 export class EventView extends React.Component {
-	removeParticipant = p => {
-		this.props.event.removeParticipant(p);
-		this.props.onUpdate();
-	}
-
 	changeNumRounds = d => {
 		this.props.event.changeNumRounds(d);
 		this.props.onUpdate();
@@ -49,7 +44,6 @@ export class EventView extends React.Component {
 				{event.canAdvanceRound() && <button className="button next" onClick={this.increaseRound} />}
 			</div>
 			<div id="event-details">
-				{currentRound === 0 && <ParticipantList event={event} removeParticipant={this.removeParticipant} />}
 				{currentRound === 0 && <RoundSpinner numRounds={event.numRounds} changeRounds={this.changeNumRounds} />}
 				{currentRound > 0 && <PairingsDisplay pairings={event.rounds[currentRound]} onUpdate={this.props.onUpdate} />}
 			</div>
