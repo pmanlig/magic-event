@@ -13,12 +13,16 @@ export class Pairings {
 		let p = new Pairings();
 		let players = event.participants
 			.map(pl => { return { player: pl, seed: Math.random() } })
-			.sort((f, g) => f.player.score() === g.player.score() ? g.seed - f.seed : g.player.score() - f.player.score());
+			.sort((f, g) => f.player.matchScore() === g.player.matchScore() ? g.seed - f.seed : g.player.matchScore() - f.player.matchScore());
 		while (players.length > 1) {
 			let p1 = players.shift().player;
 			let possibleOpponents = players.filter(o => !p1.opponents.some(xo => xo === o.player.dci));
 			if (possibleOpponents.length === 0) {
-				p.matches.push(Match.fromPlayers(p1, null));
+				if (players.length === 1) { // Prevent two byes if lowest-ranking players have already played each other
+					p.matches.push(Match.fromPlayers(p1, players.shift().player));
+				} else {
+					p.matches.push(Match.fromPlayers(p1, null));
+				}
 			} else {
 				let p2 = possibleOpponents.shift().player;
 				players = players.filter(xp => xp.player.dci !== p2.dci);

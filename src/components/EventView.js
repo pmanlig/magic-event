@@ -35,7 +35,6 @@ export class EventView extends React.Component {
 		}
 
 		let currentRound = event.currentRound;
-
 		return <div id="event-view">
 			<div id="event-bar">
 				<button className="button previous" onClick={this.decreaseRound} />
@@ -45,7 +44,7 @@ export class EventView extends React.Component {
 			</div>
 			<div id="event-details">
 				{currentRound === 0 && <RoundSpinner numRounds={event.numRounds} changeRounds={this.changeNumRounds} />}
-				{currentRound > 0 && <PairingsDisplay pairings={event.rounds[currentRound]} onUpdate={this.props.onUpdate} />}
+				{currentRound > 0 && <PairingsDisplay pairings={event.rounds[currentRound]} participants={event.participants} onUpdate={this.props.onUpdate} />}
 			</div>
 		</div>;
 	}

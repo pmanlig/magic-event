@@ -3,10 +3,10 @@ import { Participant, Pairings } from '.';
 export class Event {
 	constructor({ name, numRounds, participants, rounds, currentRound }) {
 		this.name = name || "";
+		this.currentRound = currentRound || 0;
 		this.numRounds = numRounds || 0;
 		this.participants = participants ? participants.map(p => new Participant(p)) : [];
 		this.rounds = rounds ? rounds.map(r => Pairings.fromJson(r)) : [];
-		this.currentRound = currentRound || 0;
 	}
 
 	addParticipant(planeswalker) {
@@ -26,7 +26,7 @@ export class Event {
 		let nextRound = currentRound + 1;
 		if (currentRound > 0 && !rounds[nextRound]) {
 			rounds[currentRound].conclude();
-			this.participants.sort((a, b) => b.score() - a.score());
+			this.participants.sort((a, b) => b.matchScore() - a.matchScore());
 		}
 		if (currentRound < this.numRounds) {
 			if (!rounds[nextRound]) {

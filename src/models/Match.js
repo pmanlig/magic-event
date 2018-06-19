@@ -20,16 +20,16 @@ export class Match {
 		return m;
 	}
 
-	conclude() {
-		let { p1, p2, result } = this;
+	reverse(s) {
+		return s.split("").reverse().join("");
+	}
 
-		if (p2 === null) {
-			p1.scores.push(3);
-			return;
+	conclude() {
+		let { p1, p2, result, reverse } = this;
+
+		p1.conclude(result, p2);
+		if (null !== p2) {
+			p2.conclude(reverse(result), p1);
 		}
-		p1.opponents.push(p2.dci);
-		p2.opponents.push(p1.dci);
-		p1.scores.push(result === "2-0" || result === "2-1" ? 3 : result === "1-1" ? 1 : 0);
-		p2.scores.push(result === "0-2" || result === "1-2" ? 3 : result === "1-1" ? 1 : 0);
 	}
 }
